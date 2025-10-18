@@ -31,3 +31,37 @@ async function fetchProductsAsync() {
   }
 }
 
+function displayProducts(products) {
+  const container = document.getElementById("product-container")
+  if (!container) return
+
+  container.innerHTML = ""
+
+  products.slice(0, 5).forEach((product) => {
+    const name = product?.fields?.name || "Unnamed product"
+    const image = product?.fields?.image?.[0]?.url || ""
+    const priceValue = product?.fields?.price
+    const price = typeof priceValue === "number" ? `$${(priceValue / 100).toFixed(2)}` : "—"
+
+    const card = document.createElement("div")
+    card.className = "product-card"
+
+    const img = document.createElement("img")
+    img.src = image
+    img.alt = name
+    img.className = "product-image"
+
+    const title = document.createElement("h3")
+    title.textContent = name
+    title.className = "product-name"
+
+    const priceTag = document.createElement("p")
+    priceTag.textContent = price
+    priceTag.className = "product-price"
+
+    card.appendChild(img)
+    card.appendChild(title)
+    card.appendChild(priceTag)
+    container.appendChild(card)
+  })
+}
