@@ -65,3 +65,11 @@ function displayProducts(products) {
     container.appendChild(card)
   })
 }
+function handleError(error) {
+  console.error(`An error occurred: ${error?.message || error}`)
+  const container = document.getElementById("product-container")
+  if (container) {
+    container.innerHTML = '<div style="grid-column:1/-1;padding:1rem;border:1px solid #fecaca;background:#fee2e2;color:#991b1b;border-radius:12px;"><strong>Oops!</strong> We couldn’t load products. Please refresh the page.</div>'
+  }
+}
+fetchProductsAsync()
